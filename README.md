@@ -92,3 +92,46 @@ Enterprise projects
 
 🎯 License
 MIT - Use it anywhere, modify freely!
+
+# component structure
+
+| Component        | Location                                         | Why                                 |
+| ---------------- | ------------------------------------------------ | ----------------------------------- |
+| Navbar           | components/layout/main-navbar.tsx                | Layout component, used across pages |
+| LanguageSwitcher | components/shared/language-switcher.tsx          | Reusable across app                 |
+| ModeToggle       | components/ui-custom/mode-toggle.tsx             | Custom shadcn variant               |
+| Page-specific    | routes/your-page/\_components/your-component.tsx | Page-only, co-located               |
+| Form components  | components/forms/                                | Group by domain                     |
+
+Customization examples
+Remove language switcher:
+
+tsx
+<MainNavbar
+links={links}
+showLanguageSwitcher={false}
+modeToggle={<ModeToggle />}
+/>
+Custom brand:
+
+tsx
+<MainNavbar
+brand={
+<Link to="/" className="flex items-center gap-2">
+<img src="/logo.svg" className="h-6 w-6" alt="Logo" />
+<span className="font-bold">My App</span>
+</Link>
+}
+links={links}
+languageSwitcher={<LanguageSwitcher />}
+modeToggle={<ModeToggle />}
+/>
+Use as minimal navbar (only logo + theme):
+
+tsx
+<MainNavbar
+links={[]}
+languageSwitcher={null}
+showLanguageSwitcher={false}
+modeToggle={<ModeToggle />}
+/>

@@ -5,7 +5,7 @@ const languages = [
   { code: "fa", label: "فارسی" },
 ];
 
-export function LanguageSwitcher() {
+export const LanguageSwitcher = () => {
   const { i18n } = useTranslation();
 
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -21,4 +21,4 @@ export function LanguageSwitcher() {
       ))}
     </select>
   );
-}
+};
