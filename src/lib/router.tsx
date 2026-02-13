@@ -3,7 +3,11 @@ import { ROUTES } from "@/constants/routes";
 import { Layout } from "@/routes/Layout";
 import { NotFound } from "@/routes/pages";
 
-const basename = import.meta.env.PROD ? "/fonij-react-template/" : "/";
+const basename = import.meta.env.DEV
+  ? "/"
+  : import.meta.env.PROD
+    ? "/fonij-react-template/"
+    : "/";
 
 const router = createBrowserRouter(
   [
