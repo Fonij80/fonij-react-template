@@ -1,7 +1,13 @@
-import { Home, LandingPage } from "@/routes/pages";
+import {
+  Home,
+  LandingPage,
+  BlogListPage,
+  BlogPostPage,
+  BlogCMSPage,
+} from "@/routes/pages";
 import { LANDING_VARIANTS } from "@/routes/pages/landings/config";
 
-export type RouteConfig = {
+type RouteConfig = {
   path: string;
   element: React.ReactNode;
   label?: string;
@@ -19,6 +25,25 @@ export const ROUTES: RouteConfig[] = [
     element: <Home />,
     label: "Home",
     nav: true,
+  },
+
+  {
+    path: "/blog",
+    element: <BlogListPage />,
+    label: "Blog",
+    nav: true,
+  },
+  {
+    path: "/blog/:slug",
+    element: <BlogPostPage />,
+    label: undefined,
+    nav: false,
+  },
+  {
+    path: "/admin/blog",
+    element: <BlogCMSPage />,
+    label: "Blog CMS",
+    nav: false, // protect this with your auth later
   },
 
   ...LANDING_VARIANTS.map((landing) => ({

@@ -1,14 +1,4 @@
-import * as React from "react";
-import { Link } from "react-router-dom";
-import {
-  Facebook,
-  Twitter,
-  Linkedin,
-  Github,
-  Mail,
-  Phone,
-  MapPin,
-} from "lucide-react";
+import { Github, Mail, Phone, MapPin } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";

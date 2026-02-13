@@ -3,9 +3,8 @@ import { ROUTES } from "@/constants/routes";
 import { Layout } from "@/routes/Layout";
 import { NotFound } from "@/routes/pages";
 
-const basename = import.meta.env.DEV
-  ? "/"
-  : import.meta.env.PROD
+const basename =
+  import.meta.env.BASE_URL === "/fonij-react-template/"
     ? "/fonij-react-template/"
     : "/";
 
