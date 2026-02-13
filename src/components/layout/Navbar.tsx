@@ -18,33 +18,29 @@ type NavLink = {
 };
 
 type NavbarProps = {
-  /** Brand logo element (text, SVG, img, etc.) */
   brand?: React.ReactNode;
-  /** List of nav links (2–6 recommended) */
   links?: NavLink[];
-  /** Optional language switcher component (e.g. your LanguageSwitcher) */
   languageSwitcher?: React.ReactNode;
-  /** Optional theme mode toggle component (e.g. your ModeToggle) */
-  modeToggle?: React.ReactNode;
+  themeToggle?: React.ReactNode;
   /** Custom className for wrapper */
   className?: string;
   /** Hide brand / links / language / theme if needed */
   showBrand?: boolean;
   showLinks?: boolean;
   showLanguageSwitcher?: boolean;
-  showModeToggle?: boolean;
+  showThemeToggle?: boolean;
 };
 
 export const Navbar = ({
   brand,
   links = [],
   languageSwitcher,
-  modeToggle,
+  themeToggle,
   className,
   showBrand = true,
   showLinks = true,
   showLanguageSwitcher = true,
-  showModeToggle = true,
+  showThemeToggle = true,
 }: NavbarProps) => {
   const location = useLocation();
   const [open, setOpen] = React.useState(false);
@@ -110,8 +106,8 @@ export const Navbar = ({
             <div className="flex items-center">{languageSwitcher}</div>
           )}
 
-          {showModeToggle && modeToggle && (
-            <div className="flex items-center">{modeToggle}</div>
+          {showThemeToggle && themeToggle && (
+            <div className="flex items-center">{themeToggle}</div>
           )}
         </div>
 
@@ -121,7 +117,7 @@ export const Navbar = ({
             <div>{languageSwitcher}</div>
           )}
 
-          {showModeToggle && modeToggle && <div>{modeToggle}</div>}
+          {showThemeToggle && themeToggle && <div>{themeToggle}</div>}
 
           {hasLinks && (
             <Sheet open={open} onOpenChange={setOpen}>

@@ -57,7 +57,7 @@ src/
 | Feature | Status   | Usage                           |
 | ------- | -------- | ------------------------------- |
 | Routing | ✅ Ready | Edit src/routes/ files          |
-| Theming | ✅ Ready | <ModeToggle /> component        |
+| Theming | ✅ Ready | <ThemeToggle /> component       |
 | i18n    | ✅ Ready | useTranslation('namespace')     |
 | shadcn  | ✅ Ready | npx shadcn-ui@latest add button |
 
@@ -79,7 +79,7 @@ Install shadcn components:
 npx shadcn-ui@latest add button card dialog
 ```
 
-Toggle theme: Use <ModeToggle /> anywhere
+Toggle theme: Use <ThemeToggle /> anywhere
 
 👥 Perfect For
 SaaS dashboards
@@ -99,39 +99,17 @@ MIT - Use it anywhere, modify freely!
 | ---------------- | ------------------------------------------------ | ----------------------------------- |
 | Navbar           | components/layout/main-navbar.tsx                | Layout component, used across pages |
 | LanguageSwitcher | components/shared/language-switcher.tsx          | Reusable across app                 |
-| ModeToggle       | components/ui-custom/mode-toggle.tsx             | Custom shadcn variant               |
+| ThemeToggle      | components/ui-custom/mode-toggle.tsx             | Custom shadcn variant               |
 | Page-specific    | routes/your-page/\_components/your-component.tsx | Page-only, co-located               |
 | Form components  | components/forms/                                | Group by domain                     |
 
-Customization examples
-Remove language switcher:
+# Component Customization
 
-tsx
-<MainNavbar
-links={links}
-showLanguageSwitcher={false}
-modeToggle={<ModeToggle />}
-/>
-Custom brand:
+## Layout
 
-tsx
-<MainNavbar
-brand={
-<Link to="/" className="flex items-center gap-2">
-<img src="/logo.svg" className="h-6 w-6" alt="Logo" />
-<span className="font-bold">My App</span>
-</Link>
-}
-links={links}
-languageSwitcher={<LanguageSwitcher />}
-modeToggle={<ModeToggle />}
-/>
-Use as minimal navbar (only logo + theme):
+[Navbar](./docs/customized-components/nabbar.md)
+[Footer](./docs/customized-components/footer.md)
 
-tsx
-<MainNavbar
-links={[]}
-languageSwitcher={null}
-showLanguageSwitcher={false}
-modeToggle={<ModeToggle />}
-/>
+## Landing
+
+[Hero](./docs/customized-components/hero.md)

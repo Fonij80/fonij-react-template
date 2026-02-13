@@ -1,4 +1,5 @@
-import { Home } from "@/routes/pages";
+import { Home, LandingPage } from "@/routes/pages";
+import { LANDING_VARIANTS } from "@/routes/pages/landings/config";
 
 export type RouteConfig = {
   path: string;
@@ -19,4 +20,11 @@ export const ROUTES: RouteConfig[] = [
     label: "Home",
     nav: true,
   },
+
+  ...LANDING_VARIANTS.map((landing) => ({
+    path: landing.path,
+    element: <LandingPage />,
+    label: landing.title,
+    nav: false,
+  })),
 ];
