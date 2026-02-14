@@ -10,7 +10,7 @@ import {
 import { cn } from "@/lib/utils";
 import { languages } from "@/constants/supported-languages";
 
-export const LanguageSwitcher = () => {
+export const LanguageToggle = () => {
   const { i18n } = useTranslation();
 
   return (

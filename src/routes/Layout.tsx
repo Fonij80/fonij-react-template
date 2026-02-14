@@ -1,6 +1,7 @@
-import { Footer, Navbar, LanguageSwitcher, ThemeToggle } from "@/components";
+import { Footer, Navbar } from "@/components";
 import { getNavLinks, ROUTES } from "@/constants/routes";
 import { Outlet, ScrollRestoration } from "react-router-dom";
+import { LanguageToggle, ThemeToggle } from "@/components/ui/custom";
 
 export const Layout = () => {
   const links = getNavLinks(ROUTES);
@@ -8,7 +9,7 @@ export const Layout = () => {
     <div className="min-h-screen bg-background">
       <Navbar
         links={links}
-        languageSwitcher={<LanguageSwitcher />}
+        languageSwitcher={<LanguageToggle />}
         themeToggle={<ThemeToggle />}
       />
       <main className="container mx-auto p-8">

@@ -13,7 +13,3 @@ export { BlogList } from "./sections/blog/BlogList";
 export { BlogPostCard } from "./sections/blog/BlogPostCard";
 export { BlogPostForm } from "./sections/blog/BlogPostForm";
 export { BlogPost } from "./sections/blog/BlogPost";
-
-// ---------- ui-custom ----------
-export { LanguageSwitcher } from "./ui-custom/LanguageSwitcher";
-export { ThemeToggle } from "./ui-custom/ThemeToggle";

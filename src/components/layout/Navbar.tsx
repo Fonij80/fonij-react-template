@@ -4,13 +4,20 @@ import { Menu, X } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetTitle, // ✅ Required
+  SheetTrigger,
+} from "@/components/ui/sheet";
 import {
   NavigationMenu,
   NavigationMenuItem,
   NavigationMenuLink,
   NavigationMenuList,
 } from "@/components/ui/navigation-menu";
+import { Logo } from "@/components/ui/custom";
 
 type NavLink = {
   label: string;
@@ -22,13 +29,23 @@ type NavbarProps = {
   links?: NavLink[];
   languageSwitcher?: React.ReactNode;
   themeToggle?: React.ReactNode;
-  /** Custom className for wrapper */
   className?: string;
-  /** Hide brand / links / language / theme if needed */
   showBrand?: boolean;
   showLinks?: boolean;
   showLanguageSwitcher?: boolean;
   showThemeToggle?: boolean;
+};
+
+const BrandSection = ({
+  showBrand,
+  brand,
+}: {
+  showBrand: boolean;
+  brand?: React.ReactNode;
+}) => {
+  if (!showBrand) return null;
+
+  return <div className="flex items-center">{brand ?? <Logo />}</div>;
 };
 
 export const Navbar = ({
@@ -56,21 +73,7 @@ export const Navbar = ({
     >
       <div className="container mx-auto flex h-16 items-center justify-between gap-4 px-4 md:h-20 md:px-6">
         {/* Left: Brand */}
-        {showBrand && (
-          <div className="flex items-center">
-            {brand ?? (
-              <Link
-                to="/"
-                className="flex items-center gap-2 text-lg font-semibold"
-              >
-                <span className="inline-block rounded-md bg-primary px-2 py-1 text-sm font-bold text-primary-foreground">
-                  Fonij
-                </span>
-                <span className="hidden sm:inline">React Base</span>
-              </Link>
-            )}
-          </div>
-        )}
+        <BrandSection showBrand={showBrand} brand={brand} />
 
         {/* Desktop nav + actions */}
         <div className="ml-auto hidden items-center gap-4 md:flex">
@@ -136,24 +139,16 @@ export const Navbar = ({
                 </Button>
               </SheetTrigger>
               <SheetContent side="left" className="flex flex-col">
-                {showBrand && (
-                  <div className="mb-6 mt-2">
-                    {brand ?? (
-                      <Link
-                        to="/"
-                        className="flex items-center gap-2 text-lg font-semibold"
-                        onClick={() => setOpen(false)}
-                      >
-                        <span className="inline-block rounded-md bg-primary px-2 py-1 text-sm font-bold text-primary-foreground">
-                          Fonij
-                        </span>
-                        <span>React Base</span>
-                      </Link>
-                    )}
-                  </div>
-                )}
+                {/* ✅ Fixed: Added required DialogTitle + DialogDescription */}
+                <SheetTitle className="sr-only">Navigation Menu</SheetTitle>
+                <SheetDescription className="sr-only">
+                  Select a page to navigate to
+                </SheetDescription>
 
-                <nav className="flex flex-col gap-2">
+                {/* Reusable Brand in mobile sheet */}
+                <BrandSection showBrand={showBrand} brand={brand} />
+
+                <nav className="flex flex-col gap-2 mt-4">
                   {links.map((link) => {
                     const isActive =
                       location.pathname === link.to ||
