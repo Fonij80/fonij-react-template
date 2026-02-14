@@ -1,8 +1,5 @@
-// // -------------------- buttons --------------------
-// export { SubmitButton } from "./buttons/SubmitButton";
-// export { BackButton } from "./buttons/BackButton";
-// export { NextPreviousButton } from "./buttons/NextPreviousButton";
-// export { LinkButton } from "./buttons/LinkButton";
+// -------------------- buttons --------------------
+export { ScrollToTop } from "./buttons/ScrollToTop";
 
 // // -------------------- icons --------------------
 // export { PrivacyNoticeIcon } from "./icons/PrivacyNoticeIcon";

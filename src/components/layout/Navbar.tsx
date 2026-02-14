@@ -1,6 +1,8 @@
 import * as React from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X } from "lucide-react";
+import { getNavLinks, ROUTES } from "@/constants/routes";
+import { LanguageToggle, ThemeToggle } from "@/components/ui/custom";
 
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -8,7 +10,7 @@ import {
   Sheet,
   SheetContent,
   SheetDescription,
-  SheetTitle, // ✅ Required
+  SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
 import {
@@ -26,9 +28,9 @@ type NavLink = {
 
 type NavbarProps = {
   brand?: React.ReactNode;
-  links?: NavLink[];
-  languageSwitcher?: React.ReactNode;
-  themeToggle?: React.ReactNode;
+  links?: NavLink[]; // Optional override
+  languageSwitcher?: React.ReactNode; // Optional override
+  themeToggle?: React.ReactNode; // Optional override
   className?: string;
   showBrand?: boolean;
   showLinks?: boolean;
@@ -44,15 +46,14 @@ const BrandSection = ({
   brand?: React.ReactNode;
 }) => {
   if (!showBrand) return null;
-
   return <div className="flex items-center">{brand ?? <Logo />}</div>;
 };
 
 export const Navbar = ({
   brand,
-  links = [],
-  languageSwitcher,
-  themeToggle,
+  links: propLinks,
+  languageSwitcher: propLanguageSwitcher,
+  themeToggle: propThemeToggle,
   className,
   showBrand = true,
   showLinks = true,
@@ -62,7 +63,14 @@ export const Navbar = ({
   const location = useLocation();
   const [open, setOpen] = React.useState(false);
 
-  const hasLinks = showLinks && links.length > 0;
+  // ✅ Smart defaults with priority
+  const defaultLinks = getNavLinks(ROUTES);
+  const finalLinks = propLinks || defaultLinks;
+
+  const finalLanguageSwitcher = propLanguageSwitcher || <LanguageToggle />;
+  const finalThemeToggle = propThemeToggle || <ThemeToggle />;
+
+  const hasLinks = showLinks && finalLinks.length > 0;
 
   return (
     <header
@@ -72,15 +80,15 @@ export const Navbar = ({
       )}
     >
       <div className="container mx-auto flex h-16 items-center justify-between gap-4 px-4 md:h-20 md:px-6">
-        {/* Left: Brand */}
+        {/* Start: Brand (RTL: right side) */}
         <BrandSection showBrand={showBrand} brand={brand} />
 
-        {/* Desktop nav + actions */}
-        <div className="ml-auto hidden items-center gap-4 md:flex">
+        {/* Desktop nav + actions - RTL ready */}
+        <div className="hidden items-center gap-4 md:flex ms-auto rtl:me-auto">
           {hasLinks && (
             <NavigationMenu>
               <NavigationMenuList>
-                {links.map((link) => {
+                {finalLinks.map((link) => {
                   const isActive =
                     location.pathname === link.to ||
                     (link.to !== "/" && location.pathname.startsWith(link.to));
@@ -105,22 +113,24 @@ export const Navbar = ({
             </NavigationMenu>
           )}
 
-          {showLanguageSwitcher && languageSwitcher && (
-            <div className="flex items-center">{languageSwitcher}</div>
+          {showLanguageSwitcher && (
+            <div className="flex items-center">{finalLanguageSwitcher}</div>
           )}
 
-          {showThemeToggle && themeToggle && (
-            <div className="flex items-center">{themeToggle}</div>
+          {showThemeToggle && (
+            <div className="flex items-center">{finalThemeToggle}</div>
           )}
         </div>
 
-        {/* Mobile actions: theme/lang + burger */}
+        {/* Mobile actions - RTL ready */}
         <div className="flex items-center gap-2 md:hidden">
-          {showLanguageSwitcher && languageSwitcher && (
-            <div>{languageSwitcher}</div>
+          {showLanguageSwitcher && (
+            <div className="flex-shrink-0">{finalLanguageSwitcher}</div>
           )}
 
-          {showThemeToggle && themeToggle && <div>{themeToggle}</div>}
+          {showThemeToggle && (
+            <div className="flex-shrink-0">{finalThemeToggle}</div>
+          )}
 
           {hasLinks && (
             <Sheet open={open} onOpenChange={setOpen}>
@@ -139,17 +149,15 @@ export const Navbar = ({
                 </Button>
               </SheetTrigger>
               <SheetContent side="left" className="flex flex-col">
-                {/* ✅ Fixed: Added required DialogTitle + DialogDescription */}
                 <SheetTitle className="sr-only">Navigation Menu</SheetTitle>
                 <SheetDescription className="sr-only">
                   Select a page to navigate to
                 </SheetDescription>
 
-                {/* Reusable Brand in mobile sheet */}
                 <BrandSection showBrand={showBrand} brand={brand} />
 
-                <nav className="flex flex-col gap-2 mt-4">
-                  {links.map((link) => {
+                <nav className="mt-4 flex flex-col gap-2">
+                  {finalLinks.map((link) => {
                     const isActive =
                       location.pathname === link.to ||
                       (link.to !== "/" &&

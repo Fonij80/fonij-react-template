@@ -1,7 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import { ROUTES } from "@/constants/routes";
-import { Layout } from "@/routes/Layout";
-import { NotFound } from "@/routes/pages";
+import { Layout } from "@/pages/Layout";
+import { NotFound } from "../pages";
 
 const basename =
   import.meta.env.BASE_URL === "/fonij-react-template/"

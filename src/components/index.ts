@@ -1,6 +1,7 @@
 // ---------- layout ----------
 export { Navbar } from "./layout/Navbar";
 export { Footer } from "./layout/Footer";
+export { ScrollToTop } from "./ui/custom/buttons/ScrollToTop";
 
 // ---------- sections/landing ----------
 export { Hero } from "./sections/landing/Hero";

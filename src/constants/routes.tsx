@@ -4,8 +4,8 @@ import {
   BlogListPage,
   BlogPostPage,
   BlogCMSPage,
-} from "@/routes/pages";
-import { LANDING_VARIANTS } from "@/routes/pages/landings/config";
+} from "../pages";
+import { LANDING_VARIANTS } from "../pages/landings/config";
 
 type RouteConfig = {
   path: string;
