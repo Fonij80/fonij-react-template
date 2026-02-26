@@ -1,11 +1,11 @@
 // ---------- layout ----------
-export { Navbar } from "./layout/Navbar";
-export { Footer } from "./layout/Footer";
+export { Navbar } from "./sections/Navbars/Navbar";
+export { Footer } from "./sections/Footers/Footer";
 export { ScrollToTop } from "./ui/custom/buttons/ScrollToTop";
 
 // ---------- sections/landing ----------
-export { Hero } from "./sections/landing/Hero";
-export { Features } from "./sections/landing/Features";
+export { Hero } from "./sections/Heros/Hero";
+export { Features } from "./sections/Features/Features";
 
 // ---------- sections/blog ----------
 export { BlogLayout } from "./sections/blog/BlogLayout";

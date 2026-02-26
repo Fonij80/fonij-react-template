@@ -3,10 +3,7 @@ import { ROUTES } from "@/constants/routes";
 import { Layout } from "@/pages/Layout";
 import { NotFound } from "../pages";
 
-const basename =
-  import.meta.env.BASE_URL === "/fonij-react-template/"
-    ? "/fonij-react-template/"
-    : "/";
+const basename = import.meta.env.BASE_URL?.replace(/^\.\//, "/") || "/";
 
 const router = createBrowserRouter(
   [
